@@ -3,20 +3,68 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package gui;
+import dao.DocenteDAO;
+import dto.Docente;
 
+
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import javax.swing.JOptionPane;
 /**
  *
  * @author caleb
  */
 public class DocenteFrameNew extends javax.swing.JFrame {
+    
+    
+    DocenteDAO lista = new DocenteDAO();
+    boolean agregando = false;
+    SimpleDateFormat s = new SimpleDateFormat("yyyy/mm/dd");
+    
 
     /**
      * Creates new form DocenteFrame
      */
     public DocenteFrameNew() {
         initComponents();
+        setLocationRelativeTo(null);
     }
-
+    
+    
+    
+    public void habilitarCajas(boolean x) {
+        txtCodigo.setEnabled(x);
+        txtNombre.setEnabled(x);
+        txtDireccion.setEnabled(x);
+        txtNacimiento.setEnabled(x);
+        txtTalla.setEnabled(x);
+        txtCorreo.setEnabled(x);
+    }
+    
+    public void limpiarCajas(boolean x) {
+        txtCodigo.setText("");
+        txtNombre.setText("");
+        txtDireccion.setText("");
+        txtNacimiento.setText("");
+        txtTalla.setText("");
+        txtCorreo.setText("");
+    }
+    public void habilitarEdicion(boolean x)
+    {
+        btnAgregar.setEnabled(x);
+        btnMostrar.setEnabled(x);
+        btnEliminar.setEnabled(x);
+        btnModificar.setEnabled(x);
+        btnGrabar.setEnabled(x);
+        btnCancelar.setEnabled(x);        
+    }
+        public void habilitarMovimiento(boolean x)
+    {
+        btnPrimero.setEnabled(x);
+        btnAnterior.setEnabled(x);
+        btnSiguiente.setEnabled(x);
+        btnUltimo.setEnabled(x);           
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -33,22 +81,22 @@ public class DocenteFrameNew extends javax.swing.JFrame {
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
-        jTextField2 = new javax.swing.JTextField();
-        jTextField3 = new javax.swing.JTextField();
-        jTextField4 = new javax.swing.JTextField();
-        jTextField5 = new javax.swing.JTextField();
-        jTextField6 = new javax.swing.JTextField();
+        txtCodigo = new javax.swing.JTextField();
+        txtNombre = new javax.swing.JTextField();
+        txtDireccion = new javax.swing.JTextField();
+        txtNacimiento = new javax.swing.JTextField();
+        txtTalla = new javax.swing.JTextField();
+        txtCorreo = new javax.swing.JTextField();
         btnPrimero1 = new javax.swing.JButton();
         btnAnterior = new javax.swing.JButton();
         btnSiguiente = new javax.swing.JButton();
         btnUltimo = new javax.swing.JButton();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
-        jButton5 = new javax.swing.JButton();
-        jButton6 = new javax.swing.JButton();
+        btnAgregar = new javax.swing.JButton();
+        btnModificar = new javax.swing.JButton();
+        btnEliminar = new javax.swing.JButton();
+        btnGrabar = new javax.swing.JButton();
+        btnMostrar = new javax.swing.JButton();
+        btnCancelar = new javax.swing.JButton();
 
         btnPrimero.setText("|<");
         btnPrimero.addActionListener(new java.awt.event.ActionListener() {
@@ -99,17 +147,37 @@ public class DocenteFrameNew extends javax.swing.JFrame {
             }
         });
 
-        jButton1.setText("Agregar");
+        btnAgregar.setText("Agregar");
+        btnAgregar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAgregarActionPerformed(evt);
+            }
+        });
 
-        jButton2.setText("Modificar");
+        btnModificar.setText("Modificar");
+        btnModificar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnModificarActionPerformed(evt);
+            }
+        });
 
-        jButton3.setText("Eliminar");
+        btnEliminar.setText("Eliminar");
 
-        jButton4.setText("Grabar");
+        btnGrabar.setText("Grabar");
+        btnGrabar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnGrabarActionPerformed(evt);
+            }
+        });
 
-        jButton5.setText("Mostrar");
+        btnMostrar.setText("Mostrar");
+        btnMostrar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnMostrarActionPerformed(evt);
+            }
+        });
 
-        jButton6.setText("Cancelar");
+        btnCancelar.setText("Cancelar");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -130,39 +198,42 @@ public class DocenteFrameNew extends javax.swing.JFrame {
                         .addGroup(layout.createSequentialGroup()
                             .addComponent(jLabel6)
                             .addGap(18, 18, 18)
-                            .addComponent(jTextField6))
+                            .addComponent(txtCorreo))
                         .addGroup(layout.createSequentialGroup()
                             .addComponent(jLabel5)
                             .addGap(18, 18, 18)
-                            .addComponent(jTextField5))
+                            .addComponent(txtTalla))
                         .addGroup(layout.createSequentialGroup()
                             .addComponent(jLabel4)
                             .addGap(18, 18, 18)
-                            .addComponent(jTextField4))
+                            .addComponent(txtNacimiento))
                         .addGroup(layout.createSequentialGroup()
                             .addComponent(jLabel3)
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(jTextField3))
+                            .addComponent(txtDireccion))
                         .addGroup(layout.createSequentialGroup()
                             .addComponent(jLabel2)
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                            .addComponent(jTextField2))
+                            .addComponent(txtNombre))
                         .addGroup(layout.createSequentialGroup()
                             .addComponent(jLabel1)
                             .addGap(18, 18, 18)
-                            .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(txtCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jButton1)
-                            .addComponent(jButton4))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(btnGrabar)
+                                .addGap(19, 19, 19))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addComponent(btnAgregar)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(btnModificar)
+                            .addComponent(btnMostrar))
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jButton2)
-                            .addComponent(jButton5))
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jButton6)
-                            .addComponent(jButton3))))
+                            .addComponent(btnCancelar)
+                            .addComponent(btnEliminar))))
                 .addContainerGap(41, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -171,27 +242,27 @@ public class DocenteFrameNew extends javax.swing.JFrame {
                 .addGap(53, 53, 53)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel1)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel2)
-                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel3)
-                    .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtDireccion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
-                    .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtNacimiento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
-                    .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtTalla, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6)
-                    .addComponent(jTextField6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtCorreo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnPrimero1)
@@ -200,14 +271,14 @@ public class DocenteFrameNew extends javax.swing.JFrame {
                     .addComponent(btnUltimo))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
-                    .addComponent(jButton2)
-                    .addComponent(jButton3))
+                    .addComponent(btnAgregar)
+                    .addComponent(btnModificar)
+                    .addComponent(btnEliminar))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton4)
-                    .addComponent(jButton5)
-                    .addComponent(jButton6))
+                    .addComponent(btnGrabar)
+                    .addComponent(btnMostrar)
+                    .addComponent(btnCancelar))
                 .addContainerGap(18, Short.MAX_VALUE))
         );
 
@@ -215,24 +286,103 @@ public class DocenteFrameNew extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnPrimeroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPrimeroActionPerformed
+        lista.primero();
+        Docente a = lista.getDocente();
+        
+        txtCodigo.setText(a.getCodigo());
+        txtNombre.setText(a.getNombre());
+        txtDireccion.setText(a.getDireccion());        
+        txtNacimiento.setText(s.format(a.getFechaNacimiento()));
+        txtTalla.setText(a.getTalla()+"");
+        txtCorreo.setText(a.getCorreo());        
         
     }//GEN-LAST:event_btnPrimeroActionPerformed
 
     private void btnPrimero1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPrimero1ActionPerformed
-        
+          lista.primero();
+        Docente a = lista.getDocente();
+        txtCodigo.setText(a.getCodigo());
+        txtNombre.setText(a.getNombre());
+        txtDireccion.setText(a.getDireccion());
+        txtNacimiento.setText(s.format(a.getFechaNacimiento()));
+        txtTalla.setText(a.getTalla()+"");
+        txtCorreo.setText(a.getCorreo()); 
     }//GEN-LAST:event_btnPrimero1ActionPerformed
 
     private void btnAnteriorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAnteriorActionPerformed
-        
+          lista.anterior();
+        Docente a = lista.getDocente();
+        txtCodigo.setText(a.getCodigo());
+        txtNombre.setText(a.getNombre());
+        txtDireccion.setText(a.getDireccion());
+        txtNacimiento.setText(s.format(a.getFechaNacimiento()));
+        txtTalla.setText(a.getTalla()+"");
+        txtCorreo.setText(a.getCorreo()); 
     }//GEN-LAST:event_btnAnteriorActionPerformed
 
     private void btnSiguienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSiguienteActionPerformed
-        
+          lista.siguiente();
+        Docente a = lista.getDocente();
+        txtCodigo.setText(a.getCodigo());
+        txtNombre.setText(a.getNombre());
+        txtDireccion.setText(a.getDireccion());
+        txtNacimiento.setText(s.format(a.getFechaNacimiento()));
+        txtTalla.setText(a.getTalla()+"");
+        txtCorreo.setText(a.getCorreo()); 
     }//GEN-LAST:event_btnSiguienteActionPerformed
 
     private void btnUltimoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUltimoActionPerformed
-        
+          lista.ultimo();
+        Docente a = lista.getDocente();
+        txtCodigo.setText(a.getCodigo());
+        txtNombre.setText(a.getNombre());
+        txtDireccion.setText(a.getDireccion());
+        txtNacimiento.setText(s.format(a.getFechaNacimiento()));
+        txtTalla.setText(a.getTalla()+"");
+        txtCorreo.setText(a.getCorreo()); 
     }//GEN-LAST:event_btnUltimoActionPerformed
+
+    private void btnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarActionPerformed
+        // TODO add your handling code here:
+        agregando = true;
+        
+    }//GEN-LAST:event_btnAgregarActionPerformed
+
+    private void btnGrabarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGrabarActionPerformed
+            // TODO add your handling code here:
+        String codigo = txtCodigo.getText();
+        String nombre = txtNombre.getText();
+        String direccion = txtDireccion.getText();
+        
+        Date fecha = format.(txtNacimiento.getText());
+        Double talla = Double.parseDouble(txtTalla.getText());
+        String Correo = txtCorreo.getText();
+         
+        if (agregando == true) {
+            Docente a = new Docente(codigo, nombre,direccion,fecha,talla,correo);
+            lista.agregar(a);
+            JOptionPane.showMessageDialog(rootPane, "Agregado");
+        } else {
+           Docente a = new Docente(codigo, nombre,direccion,fecha,talla,correo);
+            lista.setDocente(a);
+            JOptionPane.showMessageDialog(rootPane, "Modificado");
+        }
+        habilitarEdicion(true);
+        habilitarMovimiento(true);
+        habilitarCajas(false);
+    }//GEN-LAST:event_btnGrabarActionPerformed
+
+    private void btnMostrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMostrarActionPerformed
+        // TODO add your handling code here:
+        String m = lista.imprimir();
+        JOptionPane.showMessageDialog(null, m);
+    }//GEN-LAST:event_btnMostrarActionPerformed
+
+    private void btnModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificarActionPerformed
+        // TODO add your handling code here:
+        agregando = false;
+        
+    }//GEN-LAST:event_btnModificarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -273,28 +423,28 @@ public class DocenteFrameNew extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnAgregar;
     private javax.swing.JButton btnAnterior;
+    private javax.swing.JButton btnCancelar;
+    private javax.swing.JButton btnEliminar;
+    private javax.swing.JButton btnGrabar;
+    private javax.swing.JButton btnModificar;
+    private javax.swing.JButton btnMostrar;
     private javax.swing.JButton btnPrimero;
     private javax.swing.JButton btnPrimero1;
     private javax.swing.JButton btnSiguiente;
     private javax.swing.JButton btnUltimo;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
-    private javax.swing.JButton jButton5;
-    private javax.swing.JButton jButton6;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField3;
-    private javax.swing.JTextField jTextField4;
-    private javax.swing.JTextField jTextField5;
-    private javax.swing.JTextField jTextField6;
+    private javax.swing.JTextField txtCodigo;
+    private javax.swing.JTextField txtCorreo;
+    private javax.swing.JTextField txtDireccion;
+    private javax.swing.JTextField txtNacimiento;
+    private javax.swing.JTextField txtNombre;
+    private javax.swing.JTextField txtTalla;
     // End of variables declaration//GEN-END:variables
 }
