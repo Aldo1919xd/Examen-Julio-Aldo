@@ -12,15 +12,15 @@ import java.util.Date;
  */
 public class Docente {
 
-    private String Codido;
+    private String Codigo;
     private String Nombre;
     private String Direccion;
     private Date FechaNacimiento;
     private double Talla;
     private String Correo;
 
-    public Docente(String Codido, String Nombre, String Direccion, Date FechaNacimiento, double Talla, String Correo) {
-        this.Codido = Codido;
+    public Docente(String Codigo, String Nombre, String Direccion, Date FechaNacimiento, double Talla, String Correo) {
+        this.Codigo = Codigo;
         this.Nombre = Nombre;
         this.Direccion = Direccion;
         this.FechaNacimiento = FechaNacimiento;
@@ -28,12 +28,12 @@ public class Docente {
         this.Correo = Correo;
     }
 
-    public String getCodido() {
-        return Codido;
+    public String getCodigo() {
+        return Codigo;
     }
 
-    public void setCodido(String Codido) {
-        this.Codido = Codido;
+    public void setCodigo(String Codigo) {
+        this.Codigo = Codigo;
     }
 
     public String getNombre() {
