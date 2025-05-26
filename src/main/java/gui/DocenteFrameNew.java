@@ -63,12 +63,12 @@ public class DocenteFrameNew extends javax.swing.JFrame {
         btnMostrar.setEnabled(x);
         btnEliminar.setEnabled(x);
         btnModificar.setEnabled(x);
-        btnGrabar.setEnabled(x);
-        btnCancelar.setEnabled(x);        
+        btnGrabar.setEnabled(!x);
+        btnCancelar.setEnabled(!x);        
     }
         public void habilitarMovimiento(boolean x)
     {
-        btnPrimero.setEnabled(x);
+        btnPrimero1.setEnabled(x);
         btnAnterior.setEnabled(x);
         btnSiguiente.setEnabled(x);
         btnUltimo.setEnabled(x);           

@@ -5,6 +5,8 @@
 package dao;
 
 import dto.Docente;
+import java.time.LocalDate;
+import java.time.Period;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -63,6 +65,4 @@ public class DocenteDAO {
         lista.remove(ubicacion);
         ubicacion = lista.size()-1;
     }        
-    
-   
 }
