@@ -64,10 +64,5 @@ public class DocenteDAO {
         ubicacion = lista.size()-1;
     }        
     
-    public Double Maximo() {
-        Double max ;
-        for (Docente d : lista) {
-           
-        }
-    }
+   
 }

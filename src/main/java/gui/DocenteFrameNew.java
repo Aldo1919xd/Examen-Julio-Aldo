@@ -28,6 +28,14 @@ public class DocenteFrameNew extends javax.swing.JFrame {
     public DocenteFrameNew() {
         initComponents();
         setLocationRelativeTo(null);
+        habilitarCajas(false);
+        habilitarMovimiento(false);
+        habilitarEdicion(false);
+        limpiarCajas(true);
+        btnAgregar.setEnabled(true);
+        btnCancelar.setEnabled(false);
+        btnGrabar.setEnabled(false);
+        
     }
     
     
@@ -162,6 +170,11 @@ public class DocenteFrameNew extends javax.swing.JFrame {
         });
 
         btnEliminar.setText("Eliminar");
+        btnEliminar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEliminarActionPerformed(evt);
+            }
+        });
 
         btnGrabar.setText("Grabar");
         btnGrabar.addActionListener(new java.awt.event.ActionListener() {
@@ -178,6 +191,11 @@ public class DocenteFrameNew extends javax.swing.JFrame {
         });
 
         btnCancelar.setText("Cancelar");
+        btnCancelar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCancelarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -345,6 +363,11 @@ public class DocenteFrameNew extends javax.swing.JFrame {
     private void btnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarActionPerformed
         // TODO add your handling code here:
         agregando = true;
+        habilitarCajas(true);
+        limpiarCajas(true);
+        habilitarMovimiento(false);
+        habilitarEdicion(false);
+        
         
     }//GEN-LAST:event_btnAgregarActionPerformed
 
@@ -354,19 +377,19 @@ public class DocenteFrameNew extends javax.swing.JFrame {
         String nombre = txtNombre.getText();
         String direccion = txtDireccion.getText();
         
-        Date fecha = format.(txtNacimiento.getText());
+        String fecha = txtNacimiento.getText();
         Double talla = Double.parseDouble(txtTalla.getText());
-        String Correo = txtCorreo.getText();
-         
-        if (agregando == true) {
-            Docente a = new Docente(codigo, nombre,direccion,fecha,talla,correo);
+        String correo = txtCorreo.getText();
+       
+        try{if (agregando == true) {
+            Docente a = new Docente(codigo, nombre,direccion,s.parse(fecha),talla,correo);
             lista.agregar(a);
             JOptionPane.showMessageDialog(rootPane, "Agregado");
         } else {
-           Docente a = new Docente(codigo, nombre,direccion,fecha,talla,correo);
+           Docente a = new Docente(codigo, nombre,direccion,s.parse(fecha),talla,correo);
             lista.setDocente(a);
             JOptionPane.showMessageDialog(rootPane, "Modificado");
-        }
+        } } catch(Exception e) {System.out.println("xd");}
         habilitarEdicion(true);
         habilitarMovimiento(true);
         habilitarCajas(false);
@@ -381,8 +404,40 @@ public class DocenteFrameNew extends javax.swing.JFrame {
     private void btnModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificarActionPerformed
         // TODO add your handling code here:
         agregando = false;
+                
+        habilitarCajas(true);
+        habilitarEdicion(false);
+        habilitarMovimiento(false);
         
     }//GEN-LAST:event_btnModificarActionPerformed
+
+    private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
+        // TODO add your handling code here:
+         lista.Eliminar();
+        lista.anterior();
+        Docente a = lista.getDocente();
+       txtCodigo.setText(a.getCodigo());
+        txtNombre.setText(a.getNombre());
+        txtDireccion.setText(a.getDireccion());
+        txtNacimiento.setText(s.format(a.getFechaNacimiento()));
+        txtTalla.setText(a.getTalla()+"");
+        txtCorreo.setText(a.getCorreo());   
+    }//GEN-LAST:event_btnEliminarActionPerformed
+
+    private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
+        // TODO add your handling code here:
+         limpiarCajas(true);
+        habilitarEdicion(true);
+        habilitarMovimiento(true);
+        habilitarCajas(false);
+         Docente a = lista.getDocente();
+        txtCodigo.setText(a.getCodigo());
+        txtNombre.setText(a.getNombre());
+        txtDireccion.setText(a.getDireccion());
+        txtNacimiento.setText(s.format(a.getFechaNacimiento()));
+        txtTalla.setText(a.getTalla()+"");
+        txtCorreo.setText(a.getCorreo()); 
+    }//GEN-LAST:event_btnCancelarActionPerformed
 
     /**
      * @param args the command line arguments
