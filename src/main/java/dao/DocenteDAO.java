@@ -60,7 +60,33 @@ public class DocenteDAO {
         }
         return resultado;
     }
-    
+    public double promedioEdad() {
+    if (lista.isEmpty()) return 0;
+
+    int suma = 0;
+    for (Docente d : lista) {
+        Date fecha = d.getFechaNacimiento();
+        LocalDate nacimiento = fecha.toInstant().atZone(java.time.ZoneId.systemDefault()).toLocalDate();
+        int edad = Period.between(nacimiento, LocalDate.now()).getYears();
+        suma += edad;
+    }
+    return (double) suma / lista.size();
+      }
+
+     public String tallaMM() {
+    if (lista.isEmpty()) return "Lista vacía";
+
+    double min = lista.get(0).getTalla();
+    double max = lista.get(0).getTalla();
+
+    for (Docente d : lista) {
+        double t = d.getTalla();
+        if (t < min) min = t;
+        if (t > max) max = t;
+    }
+
+    return "Talla mínima: " + min + ", Talla máxima: " + max;
+     } 
     public void Eliminar() {
         lista.remove(ubicacion);
         ubicacion = lista.size()-1;
